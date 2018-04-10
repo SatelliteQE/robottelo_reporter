@@ -131,7 +131,7 @@ module Robottelo
         File.open @report_file_path, 'w' do |f|
           f << @xml_results_builder.build
         end
-        @io.puts "Robottelo Reporter build finished: #{@report_file_path}"
+        @io.puts "\nRobottelo Reporter build finished: #{@report_file_path}"
       end
     end
   end
