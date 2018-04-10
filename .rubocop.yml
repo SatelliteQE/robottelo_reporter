@@ -1,0 +1,29 @@
+Documentation:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
+
+SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 119
+
+MethodLength:
+  Max: 20
+
+ClassLength:
+  Max: 200
+
+ModuleLength:
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+RedundantSelf:
+  Enabled: false
