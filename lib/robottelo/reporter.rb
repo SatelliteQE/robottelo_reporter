@@ -8,8 +8,7 @@ require 'cgi'
 module Robottelo
   module Reporter
     PROPERTIES_MAPPING = {
-      pid: 'polarion-testcase-id',
-      csc: 'polarion-customerscenario'
+      pid: 'polarion-testcase-id'
     }.freeze
 
     # The XML Test report builder
