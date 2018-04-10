@@ -1,3 +1,3 @@
-robottelo_reporter:
+Robottelo Reporter:
 ===================
-Generate tests report output compatible with robottelo py.test output.
+Minitest Plugin to generate xml report compatible with robottelo py.test output.
