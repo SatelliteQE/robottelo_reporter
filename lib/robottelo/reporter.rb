@@ -8,8 +8,7 @@ require 'cgi'
 module Robottelo
   module Reporter
     PROPERTIES_MAPPING = {
-      pid: 'polarion-testcase-id',
-      csc: 'polarion-customerscenario'
+      pid: 'polarion-testcase-id'
     }.freeze
 
     # The XML Test report builder
@@ -132,7 +131,7 @@ module Robottelo
         File.open @report_file_path, 'w' do |f|
           f << @xml_results_builder.build
         end
-        @io.puts "Robottelo Reporter build finished: #{@report_file_path}"
+        @io.puts "\nRobottelo Reporter build finished: #{@report_file_path}"
       end
     end
   end
