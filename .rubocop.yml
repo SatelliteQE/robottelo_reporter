@@ -1,3 +1,10 @@
+AllCops:
+  UseCache: false
+  DefaultFormatter: progress
+  DisplayStyleGuide: true
+  DisplayCopNames: true
+  TargetRubyVersion: 2.3
+
 Documentation:
   Enabled: false
 
@@ -18,6 +25,9 @@ MethodLength:
 
 ClassLength:
   Max: 200
+
+BlockLength:
+  Max: 40
 
 ModuleLength:
   Enabled: false
