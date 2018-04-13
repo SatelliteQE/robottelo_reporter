@@ -11,6 +11,5 @@ module Minitest
     return unless options[:robottelo_reporter]
     require 'robottelo/reporter'
     self.reporter << Robottelo::Reporter::Runner.new
-    puts 'init robottelo reporter'
   end
 end

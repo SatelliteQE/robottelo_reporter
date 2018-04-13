@@ -65,10 +65,35 @@ Note: only tests with pid attribute set will be reported
 
 .. code-block:: bash
 
-    $ bundle exec rake minitest test
+    $ bundle exec rake minitest test TESTOPTS=-v --trace
 
 
-This will generate one file at test/reports/robottelo-results.xml with content
+Console output:
+
+.. code-block:: bash
+
+    ** Invoke minitest (first_time)
+    ** Invoke robottelo:setup:minitest (first_time)
+    ** Execute robottelo:setup:minitest
+    ** Execute minitest
+    ** Invoke test (first_time)
+    ** Execute test
+    Robottelo Reporter initialization
+    Run options: -v --robottelo-reporter --seed 211
+
+    # Running:
+
+    ExampleTesCase#test_example_1 = 0.00 s = .
+    ExampleTesCase#test_example_2 = 0.00 s = .
+
+    Finished in 0.001410s, 1418.0012 runs/s, 1418.0012 assertions/s.
+
+    2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+
+    Robottelo Reporter build finished: /home/user/projects/Project/test/reports/robottelo/robottelo-results.xml
+
+
+This will generate one file at test/reports/robottelo/robottelo-results.xml with content
 
 .. code-block:: xml
 
@@ -76,13 +101,13 @@ This will generate one file at test/reports/robottelo-results.xml with content
     <testsuites>
       <properties>
       </properties>
-      <testsuite errors="0" failures="0" name="minitest" skips="0" tests="2" time="1.0e-05">
-        <testcase classname="ExampleTesCase" name="test_example_1" time="1.0e-05">
+      <testsuite errors="0" failures="0" name="minitest" skips="0" tests="2" time="0.000012">
+        <testcase classname="ExampleTesCase" name="test_example_1" time="0.000009">
           <properties>
             <property name="polarion-testcase-id" value="123456"/>
           </properties>
         </testcase>
-        <testcase classname="ExampleTesCase" name="test_example_2" time="0.0">
+        <testcase classname="ExampleTesCase" name="test_example_2" time="0.000003">
           <properties>
             <property name="polarion-testcase-id" value="123457"/>
           </properties>
@@ -121,13 +146,13 @@ With this variables set The report will looks like
         <property name="polarion-custom-variant" value="server"/>
         <property name="polarion-custom-plannedin" value="Project_6_3_1_centos7"/>
       </properties>
-      <testsuite errors="0" failures="0" name="minitest" skips="0" tests="2" time="2.0e-05">
-        <testcase classname="ExampleTesCase" name="test_example_1" time="1.0e-05">
+      <testsuite errors="0" failures="0" name="minitest" skips="0" tests="2" time="0.000008">
+        <testcase classname="ExampleTesCase" name="test_example_1" time="0.000006">
           <properties>
             <property name="polarion-testcase-id" value="123456"/>
           </properties>
         </testcase>
-        <testcase classname="ExampleTesCase" name="test_example_2" time="0.0">
+        <testcase classname="ExampleTesCase" name="test_example_2" time="0.000002">
           <properties>
             <property name="polarion-testcase-id" value="123457"/>
           </properties>
@@ -148,7 +173,7 @@ In order to change the report name export variable "ROBOTTELO_REPORT_NAME"
    $ export ROBOTTELO_REPORT_NAME="other_report_name.xml"
 
 
-If "CI_REPORTS" environment variable is set the report location will be $CI_REPORTS/robottelo/report_name , where report is the default or custom one.
+If "CI_REPORTS" environment variable is set, the report location will be $CI_REPORTS/robottelo/report_name, where report name is the default or custom one.
 
 To set an other location and file name set the report file path
 
@@ -158,3 +183,33 @@ To set an other location and file name set the report file path
 
 Note: The Directory will be created automatically if it does no exist
 
+
+Generate report for one test file:
+
+To generate the report for one test file use the ruby command by adding the --robottelo-reporter option
+
+.. code-block:: bash
+
+    $ bundle exec ruby -I"lib:test" test/example_test.rb -v --robottelo-reporter
+
+
+command output:
+
+.. code-block:: bash
+
+    Robottelo Reporter initialization
+    Run options: -v --robottelo-reporter --seed 39993
+
+    # Running:
+
+    ExampleTesCase#test_example_1 = 0.00 s = .
+    ExampleTesCase#test_example_2 = 0.00 s = .
+
+    Finished in 0.004316s, 463.3767 runs/s, 463.3767 assertions/s.
+
+    2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+
+    Robottelo Reporter build finished: project_dir/test/reports/robottelo/robottelo-results.xml
+
+
+and of course the generated report content is the same as above.
