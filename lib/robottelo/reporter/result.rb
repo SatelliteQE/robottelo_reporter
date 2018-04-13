@@ -18,7 +18,7 @@ module Robottelo
       end
 
       def properties_to_xml(xml_builder)
-        pid = properties[:pid]
+        pid = properties[TEST_ATTRIBUTE_ID]
         return if pid.nil?
         xml_builder.properties do
           TESTCASE_PROPERTIES_MAPPING.each do |key, name|
