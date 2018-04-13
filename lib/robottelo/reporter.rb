@@ -15,15 +15,16 @@ module Robottelo
       def initialize(io = $stdout, options = {})
         @io = io
         @options = options
-        report_file_name = ENV['ROBOTTELO_REPORT_NAME'] || "robottelo-results.xml"
-        ci_reports_path = ENV['CI_REPORTS'] || File.expand_path("#{Dir.getwd}/test/reports")
+        report_file_name = ENV[ENV_ROBOTTELO_REPORT_NAME] || "robottelo-results.xml"
+        ci_reports_path = ENV[ENV_CI_REPORTS] || File.expand_path("#{Dir.getwd}/test/reports")
         report_dir = "#{ci_reports_path}/robottelo"
-        report_file_path = ENV['ROBOTTELO_REPORT_PATH'] || "#{report_dir}/#{report_file_name}"
+        report_file_path = ENV[ENV_ROBOTTELO_REPORT_PATH] || "#{report_dir}/#{report_file_name}"
         @report_file_path = File.expand_path(report_file_path)
         @io.puts 'Robottelo Reporter initialization'
         @xml_results = Robottelo::Reporter::ResultsToXML.new
         @last_test_properties = {}
         @last_test_klass = nil
+        @last_test_meth = nil
         @last_test_meth = nil
       end
 
@@ -40,7 +41,7 @@ module Robottelo
       end
 
       def record(result)
-        pid = @last_test_properties[:pid]
+        pid = @last_test_properties[TEST_ATTRIBUTE_ID]
         # record only if pid attribute exists
         unless pid.nil?
           test_result = Robottelo::Reporter::TestResult.new(

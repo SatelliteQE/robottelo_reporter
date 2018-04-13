@@ -34,7 +34,7 @@ module Robottelo
       end
 
       def parse_main_properties
-        prp = parse_env_properties POLARION_ENV_NAME, PROPERTY_PREFIX
+        prp = parse_env_properties ENV_POLARION_PROPERTIES, PROPERTY_PREFIX
         response_key = "#{PROPERTY_PREFIX}-response"
         if prp.key?(response_key)
           response_value = prp[response_key].split('=')
@@ -45,7 +45,7 @@ module Robottelo
       end
 
       def parse_custom_properties
-        prp = parse_env_properties POLARION_CUSTOM_ENV_NAME, PROPERTY_PREFIX_CUSTOM
+        prp = parse_env_properties ENV_POLARION_CUSTOM_PROPERTIES, PROPERTY_PREFIX_CUSTOM
         @properties = @properties.merge(prp)
       end
     end
