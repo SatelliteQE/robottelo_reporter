@@ -27,7 +27,7 @@ module Robottelo
             @polarion_properties.to_xml xml_builder
           end
           xml_builder.testsuite(errors: @errors, failures: @failures, name: 'minitest',
-                                skips: @skips, tests: tests, time: @total_time.round(5)) do
+                                skips: @skips, tests: tests, time: format('%.6f', @total_time)) do
             @results.each do |result|
               result.to_xml(xml_builder)
             end

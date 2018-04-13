@@ -21,7 +21,7 @@ LineLength:
   Max: 119
 
 MethodLength:
-  Max: 20
+  Max: 40
 
 ClassLength:
   Max: 200

@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 require 'cgi'
+require 'robottelo/reporter/constants'
 
 module Robottelo
   module Reporter
-    POLARION_ENV_NAME = 'POLARION_PROPERTIES'
-    POLARION_CUSTOM_ENV_NAME = 'POLARION_CUSTOM_PROPERTIES'
-
     class PolarionProperties
       attr_reader :properties
 
@@ -36,8 +34,8 @@ module Robottelo
       end
 
       def parse_main_properties
-        prp = parse_env_properties POLARION_ENV_NAME, 'polarion'
-        response_key = 'polarion-response'
+        prp = parse_env_properties POLARION_ENV_NAME, PROPERTY_PREFIX
+        response_key = "#{PROPERTY_PREFIX}-response"
         if prp.key?(response_key)
           response_value = prp[response_key].split('=')
           prp["#{response_key}-#{response_value[0]}"] = response_value[1] if response_value.length == 2
@@ -47,7 +45,7 @@ module Robottelo
       end
 
       def parse_custom_properties
-        prp = parse_env_properties POLARION_CUSTOM_ENV_NAME, 'polarion-custom'
+        prp = parse_env_properties POLARION_CUSTOM_ENV_NAME, PROPERTY_PREFIX_CUSTOM
         @properties = @properties.merge(prp)
       end
     end

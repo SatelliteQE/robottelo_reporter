@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
+require 'robottelo/reporter/constants'
+
 module Robottelo
   module Reporter
-    TESTCASE_PROPERTIES_MAPPING = {
-      pid: 'polarion-testcase-id'
-    }.freeze
-
     TestResult = Struct.new(:klass, :name, :time, :assertions, :failures, :properties) do
       def failure
         failures.first
@@ -39,7 +37,7 @@ module Robottelo
       end
 
       def to_xml(xml_builder)
-        xml_builder.testcase(classname: klass, name: name, time: time.round(5)) do
+        xml_builder.testcase(classname: klass, name: name, time: format('%.6f', time)) do
           failure_to_xml xml_builder, failure if failure
           properties_to_xml xml_builder
         end
